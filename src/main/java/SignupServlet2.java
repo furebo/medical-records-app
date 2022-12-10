@@ -28,14 +28,12 @@ public class SignupServlet2 extends HttpServlet {
     	String email = req.getParameter("email");
     	String lastname = req.getParameter("lastname");
     	
-    	
     	 class Users extends User {
     		String firstname;
     		String lastname;
     		String email;
     		String password;
     		String role;
-    		
     		
     		Users(String firstname, String lastname, String email, String password,String role){
     			this.firstname=firstname;
@@ -84,23 +82,6 @@ public class SignupServlet2 extends HttpServlet {
 					}
     	    	}
     	    };
-    	}
-
-    	
-    	
-    	
-    	PrintWriter out = res.getWriter();
-    	//out.println("I have received "+username +" " +lastname+ " His password is : "+ password+ " and his email is : "+email);
-    	
-    	HashMap<String,String> SignupMap = new HashMap<String,String>();
-    	SignupMap.put("email", email);
-    	SignupMap.put("FirstName", firstname);
-    	SignupMap.put("LastName", lastname);
-    	SignupMap.put("Password", password);
-    	
-    	for(Entry m : SignupMap.entrySet()) {
-    		PrintWriter out2 = res.getWriter();
-    		out2.println("The entry of this user is - " + m.getKey() + " " + m.getValue());
     	}
 	}
 
