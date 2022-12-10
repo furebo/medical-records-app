@@ -17,11 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 public class SignupServlet2 extends HttpServlet {
 	
 	HashMap <String,Object>usermap;
+	
 	private static final long serialVersionUID = 1L;
-		/**
-	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		res.addHeader("Access-Control-Allow-Origin","*");
     	String firstname = req.getParameter("firstname");
     	String password = req.getParameter("password");
@@ -42,7 +43,6 @@ public class SignupServlet2 extends HttpServlet {
     			this.password=password;
     			this.role=role;
     		}
-    		
     	    void signup() {
     	    	if(password.length()==6) {
     	    		Users patient = new Users(firstname,lastname,email,password,"Patient");
@@ -85,20 +85,9 @@ public class SignupServlet2 extends HttpServlet {
     	}
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+
+
+	
 
 }

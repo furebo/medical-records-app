@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class UserLogin extends HttpServlet {
 	
-	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		res.addHeader("Access-Control-Allow-Origin","*");
     	String password = req.getParameter("password");
     	String email = req.getParameter("email");
