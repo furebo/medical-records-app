@@ -1,5 +1,5 @@
 
  public abstract class User {
        void login() {};
-      abstract void signup();
+       abstract void signup(String user);
 }

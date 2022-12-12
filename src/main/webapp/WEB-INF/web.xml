@@ -8,7 +8,7 @@
   </servlet>
   <servlet-mapping>
      <servlet-name>signup</servlet-name>
-     <url-pattern>SignupServlet2</url-pattern>
+     <url-pattern>/SignupServlet2</url-pattern>
   </servlet-mapping>
   <servlet>
      <servlet-name>signing</servlet-name>
@@ -16,7 +16,7 @@
   </servlet>
   <servlet-mapping>
       <servlet-name>signing</servlet-name>
-      <url-pattern>UserLogin</url-pattern>
+      <url-pattern>/UserLogin</url-pattern>
   </servlet-mapping>
 
 </web-app>

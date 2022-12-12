@@ -16,78 +16,68 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class SignupServlet2 extends HttpServlet {
 	
-	HashMap <String,Object>usermap;
+	HashMap <String,HashMap<String,String>>usermap = new HashMap<String,HashMap<String,String>>();
 	
 	private static final long serialVersionUID = 1L;
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		res.addHeader("Access-Control-Allow-Origin","*");
-    	String firstname = req.getParameter("firstname");
-    	String password = req.getParameter("password");
-    	String email = req.getParameter("email");
-    	String lastname = req.getParameter("lastname");
-    	
+	            String IncomingFirstName=req.getParameter("firstname");
+	            String IncomingLastName=req.getParameter("lastname");
+	            String IncomingEmail=req.getParameter("email");
+	            String IncomingPassword=req.getParameter("password");
+	            
     	 class Users extends User {
-    		String firstname;
-    		String lastname;
-    		String email;
-    		String password;
-    		String role;
+    		
+    			String firstname;
+    			String lastname;
+    			String email;
+    			String password;
+    			String role;
     		
     		Users(String firstname, String lastname, String email, String password,String role){
-    			this.firstname=firstname;
-    			this.lastname=lastname;
-    			this.email=email;
-    			this.password=password;
+    			this.firstname=IncomingFirstName;
+    			this.lastname=IncomingLastName;
+    			this.email=IncomingEmail;
+    			this.password=IncomingPassword;
     			this.role=role;
     		}
-    	    void signup() {
-    	    	if(password.length()==6) {
-    	    		Users patient = new Users(firstname,lastname,email,password,"Patient");
-    	    		usermap.put("patient", patient);
-    	    		try {
-						res.sendRedirect("http://localhost:3000/login");
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-    	    	}else if(password.length()==4) {
-    	    		Users pharmacist = new Users(firstname,lastname,email,password,"Patient");
-    	    		usermap.put("pharmacist", pharmacist);
-    	    		try {
-						res.sendRedirect("http://localhost:3000/login");
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-    	    	}else if(password.length()==8) {
-    	    		Users physician = new Users(firstname,lastname,email,password,"Patient");
-    	    		usermap.put("physician", physician);
-    	    		try {
-						res.sendRedirect("http://localhost:3000/login");
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-    	    	}else if(password.length()==10) {
-    	    		Users admin = new Users(firstname,lastname,email,password,"Patient");
-    	    		usermap.put("admin", admin);
-    	    		try {
-						res.sendRedirect("http://localhost:3000/login");
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-    	    	}
+    		
+    	     void signup(String UserRole){
+    	    		Users user = new Users(firstname,lastname,email,password,UserRole);
+    	    		System.out.println(user);
+    	    		HashMap<String,String>newusermap = new HashMap<String,String>();
+    	    		newusermap.put("firstname", user.firstname);
+    	    		newusermap.put("lastname", user.lastname);
+    	    		newusermap.put("email", user.email);
+    	    		newusermap.put("password", user.password);
+    	    		newusermap.put("role", user.role);
+    	    		
+    	    		usermap.put(user.role, newusermap);
+    	    
+    	    		 for(Entry<String,HashMap<String,String>> m : usermap.entrySet()) {
+    	         		System.out.println(m.getValue());
+    	         	} 
+    	    		
     	    };
+    	};
+    	if(IncomingPassword.length()==4) {
+    		Users Patient = new Users(IncomingFirstName,IncomingLastName,IncomingEmail,IncomingPassword,"Patient");
+    	    Patient.signup("Patient");
+    	    System.out.println("The role of the user is: " + Patient.role);
+    		res.sendRedirect("http://localhost:3000/login");
     	}
-	}
+    	
+    	
+	};
+};
+
 
 
 
 
 	
 
-}
+
