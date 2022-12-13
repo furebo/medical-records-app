@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.JOptionPane;
 
 public class UserLogin extends HttpServlet {
 	
@@ -20,14 +21,13 @@ public class UserLogin extends HttpServlet {
     	HttpSession session = req.getSession();
     	HashMap<String,HashMap<String,String>> userdata = (HashMap<String,HashMap<String,String>>)session.getAttribute("userdata");
     	
-    	System.out.println(userdata);
+    
     	
     	HashMap<String,String> IncomingUser=new HashMap<String,String>();
     	
     	 for(Entry<String,HashMap<String,String>> m : userdata.entrySet()) {
       	    IncomingUser=m.getValue();
       	}
-    	 System.out.println(IncomingUser);
     	 
  
     	 for(Entry m: IncomingUser.entrySet()) {
@@ -38,8 +38,9 @@ public class UserLogin extends HttpServlet {
     			    	try {
     						res.sendRedirect("http://localhost:3000/patients");
     					} catch (IOException e) {
+    					
     						// TODO Auto-generated catch block
-    						e.printStackTrace();
+    					e.printStackTrace();
     					}
     					
     				}else if(IncomingPassword.length()==6) {
@@ -56,7 +57,7 @@ public class UserLogin extends HttpServlet {
     						// TODO Auto-generated catch block
     						e.printStackTrace();
     					}
-    				}else if(IncomingPassword.length()==8) {
+    				}else if(IncomingPassword.length()==10) {
     					try {
     						res.sendRedirect("http://localhost:3000/users");
     					} catch (IOException e) {
